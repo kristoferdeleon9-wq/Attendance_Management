@@ -119,7 +119,7 @@ STATISTICS
     </div>
 
     <h2>
-        0
+        {{ $totalClasses }}
     </h2>
 
     <p class="dashboard-description">
@@ -127,7 +127,7 @@ STATISTICS
     </p>
 
     <a
-        href="#"
+        href="{{ route('classes.index') }}"
         class="dashboard-link"
     >
         View classes →
@@ -229,7 +229,7 @@ SECOND SECTION
         {{-- CREATE CLASS --}}
 
         <a
-            href="#"
+            href="{{ route('classes.create') }}"
             class="quick-action"
         >
 
