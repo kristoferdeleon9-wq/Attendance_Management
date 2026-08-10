@@ -13,6 +13,9 @@ Route::get('/', function () {
     return redirect()->route('students.index');
 });
 
+Route::post('/students/import', [StudentController::class, 'import'])
+    ->name('students.import');
+
 Route::resource('students', StudentController::class);
 
 Route::resource('classes', SchoolClassController::class);

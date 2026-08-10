@@ -29,12 +29,20 @@ PAGE HEADER
 </div>
 
 
-<a
-    href="{{ route('students.create') }}"
-    class="btn btn-primary"
->
-    + Add Student
-</a>
+    <a
+        href="{{ route('students.create') }}"
+        class="btn btn-primary"
+    >
+        + Add Student
+    </a>
+
+    <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="document.getElementById('importModal').style.display='flex'"
+    >
+        ↑ Import Students
+    </button>
 
 </div>
 
@@ -315,6 +323,110 @@ STUDENT TABLE CARD
     </div>
 
 @endif
+
+</div>
+
+{{-- ==========================================
+IMPORT STUDENTS MODAL
+========================================== --}}
+
+<div
+    id="importModal"
+    class="import-modal"
+    style="display: none;"
+>
+
+    <div class="import-modal-content">
+
+        <div class="import-header">
+
+            <div>
+                <h2>Import Students</h2>
+
+                <p>
+                    Upload an Excel or CSV file containing student records.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="close-modal"
+                onclick="document.getElementById('importModal').style.display='none'"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="import-instructions">
+
+            <h3>Excel Format</h3>
+
+            <p>
+                Your first row must contain these column names:
+            </p>
+
+            <code>
+                student_id | first_name | last_name | email | course | year_level
+            </code>
+
+        </div>
+
+
+        <form
+            action="{{ route('students.import') }}"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            @csrf
+
+            <div class="file-upload">
+
+                <label for="studentFile">
+                    Select Excel File
+                </label>
+
+                <input
+                    type="file"
+                    name="file"
+                    id="studentFile"
+                    accept=".xlsx,.xls,.csv"
+                    required
+                >
+
+                <small>
+                    Supported formats: .xlsx, .xls, .csv
+                    <br>
+                    Maximum file size: 5 MB
+                </small>
+
+            </div>
+
+
+            <div class="import-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="document.getElementById('importModal').style.display='none'"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Import Students
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 

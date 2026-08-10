@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Imports\StudentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -74,4 +76,45 @@ class StudentController extends Controller
             ->route('students.index')
             ->with('success', 'Student deleted successfully!');
     }
+
+    public function import(Request $request)
+{
+    $request->validate([
+        'file' => [
+            'required',
+            'file',
+            'mimes:xlsx,xls,csv',
+            'max:5120',
+        ],
+    ]);
+
+    try {
+
+        $import = new StudentsImport();
+
+        Excel::import(
+            $import,
+            $request->file('file')
+        );
+
+        return redirect()
+            ->route('students.index')
+            ->with(
+                'success',
+                $import->imported .
+                ' student(s) imported successfully. ' .
+                $import->skipped .
+                ' student(s) skipped.'
+            );
+
+    } catch (\Exception $e) {
+
+        return redirect()
+            ->route('students.index')
+            ->with(
+                'error',
+                'Import failed: ' . $e->getMessage()
+            );
+    }
+}
 }
