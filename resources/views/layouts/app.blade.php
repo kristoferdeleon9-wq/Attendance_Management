@@ -80,8 +80,8 @@
             </a>
 
             <a
-                href="#"
-                class="menu-item"
+                href="{{ route('classes.index') }}"
+                class="menu-item {{ request()->routeIs('classes.*') ? 'active' : '' }}"
             >
                 <span>📚</span>
                 Classes
