@@ -1,108 +1,335 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Student</title>
-</head>
+@extends('layouts.app')
 
-<body>
+@section('title', 'Edit Student')
 
-<h1>Edit Student</h1>
+@section('page-title', 'Students')
 
-@if($errors->any())
+@push('styles')
+@vite('resources/css/student-create.css')
+@endpush
 
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
+@section('content')
 
-@endif
+<div class="class-page-header">
 
-<form
-    action="{{ route('students.update', $student) }}"
-    method="POST"
->
+    <div>
 
-    @csrf
-    @method('PUT')
+        <h1>Edit Student</h1>
 
-    <label>Student ID</label>
-    <br>
+        <p>
+            Update the student's information
+        </p>
 
-    <input
-        type="text"
-        name="student_id"
-        value="{{ old('student_id', $student->student_id) }}"
+    </div>
+
+    <a
+        href="{{ route('students.index') }}"
+        class="back-button"
+    >
+        ← Back to Students
+    </a>
+
+</div>
+
+
+<div class="form-header">
+
+    <div class="form-icon">
+        ✏️
+    </div>
+
+    <div>
+
+        <h2>
+            Student Information
+        </h2>
+
+        <p>
+            Update the student's information below.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="form-body">
+
+    @if($errors->any())
+
+        <div class="error-box">
+
+            <div class="error-icon">
+                !
+            </div>
+
+            <div>
+
+                <strong>
+                    Please fix the following errors:
+                </strong>
+
+                <ul>
+
+                    @foreach($errors->all() as $error)
+
+                        <li>
+                            {{ $error }}
+                        </li>
+
+                    @endforeach
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    @endif
+
+
+    <form
+        action="{{ route('students.update', $student) }}"
+        method="POST"
     >
 
-    <br><br>
+        @csrf
+        @method('PUT')
 
-    <label>First Name</label>
-    <br>
 
-    <input
-        type="text"
-        name="first_name"
-        value="{{ old('first_name', $student->first_name) }}"
-    >
+        <div class="form-grid">
 
-    <br><br>
 
-    <label>Last Name</label>
-    <br>
+            {{-- STUDENT ID --}}
 
-    <input
-        type="text"
-        name="last_name"
-        value="{{ old('last_name', $student->last_name) }}"
-    >
+            <div class="form-group">
 
-    <br><br>
+                <label for="student_id">
 
-    <label>Email</label>
-    <br>
+                    Student ID
 
-    <input
-        type="email"
-        name="email"
-        value="{{ old('email', $student->email) }}"
-    >
+                    <span class="required">*</span>
 
-    <br><br>
+                </label>
 
-    <label>Course</label>
-    <br>
+                <input
+                    type="text"
+                    id="student_id"
+                    name="student_id"
+                    class="form-control"
+                    value="{{ old('student_id', $student->student_id) }}"
+                    placeholder="e.g. 2024-0001"
+                    required
+                >
 
-    <input
-        type="text"
-        name="course"
-        value="{{ old('course', $student->course) }}"
-    >
+                @error('student_id')
 
-    <br><br>
+                    <span class="field-error">
+                        {{ $message }}
+                    </span>
 
-    <label>Year Level</label>
-    <br>
+                @enderror
 
-    <input
-        type="text"
-        name="year_level"
-        value="{{ old('year_level', $student->year_level) }}"
-    >
+            </div>
 
-    <br><br>
 
-    <button type="submit">
-        Update Student
-    </button>
+            {{-- FIRST NAME --}}
 
-</form>
+            <div class="form-group">
 
-<br>
+                <label for="first_name">
 
-<a href="{{ route('students.index') }}">
-    Back to Students
-</a>
+                    First Name
 
-</body>
-</html>
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    class="form-control"
+                    value="{{ old('first_name', $student->first_name) }}"
+                    placeholder="e.g. Juan"
+                    required
+                >
+
+                @error('first_name')
+
+                    <span class="field-error">
+                        {{ $message }}
+                    </span>
+
+                @enderror
+
+            </div>
+
+
+            {{-- LAST NAME --}}
+
+            <div class="form-group">
+
+                <label for="last_name">
+
+                    Last Name
+
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    id="last_name"
+                    name="last_name"
+                    class="form-control"
+                    value="{{ old('last_name', $student->last_name) }}"
+                    placeholder="e.g. Dela Cruz"
+                    required
+                >
+
+                @error('last_name')
+
+                    <span class="field-error">
+                        {{ $message }}
+                    </span>
+
+                @enderror
+
+            </div>
+
+
+            {{-- EMAIL --}}
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    value="{{ old('email', $student->email) }}"
+                    placeholder="student@example.com"
+                >
+
+                @error('email')
+
+                    <span class="field-error">
+                        {{ $message }}
+                    </span>
+
+                @enderror
+
+            </div>
+
+
+            {{-- COURSE --}}
+
+            <div class="form-group">
+
+                <label for="course">
+                    Course
+                </label>
+
+                <input
+                    type="text"
+                    id="course"
+                    name="course"
+                    class="form-control"
+                    value="{{ old('course', $student->course) }}"
+                    placeholder="e.g. BSIT"
+                >
+
+            </div>
+
+
+            {{-- YEAR LEVEL --}}
+
+            <div class="form-group">
+
+                <label for="year_level">
+                    Year Level
+                </label>
+
+                <select
+                    id="year_level"
+                    name="year_level"
+                    class="form-control"
+                >
+
+                    <option value="">
+                        Select year level
+                    </option>
+
+                    <option
+                        value="1st Year"
+                        {{ old('year_level', $student->year_level) == '1st Year' ? 'selected' : '' }}
+                    >
+                        1st Year
+                    </option>
+
+                    <option
+                        value="2nd Year"
+                        {{ old('year_level', $student->year_level) == '2nd Year' ? 'selected' : '' }}
+                    >
+                        2nd Year
+                    </option>
+
+                    <option
+                        value="3rd Year"
+                        {{ old('year_level', $student->year_level) == '3rd Year' ? 'selected' : '' }}
+                    >
+                        3rd Year
+                    </option>
+
+                    <option
+                        value="4th Year"
+                        {{ old('year_level', $student->year_level) == '4th Year' ? 'selected' : '' }}
+                    >
+                        4th Year
+                    </option>
+
+                </select>
+
+                @error('year_level')
+
+                    <span class="field-error">
+                        {{ $message }}
+                    </span>
+
+                @enderror
+
+            </div>
+
+
+        </div>
+
+
+        <div class="form-footer">
+
+            <a
+                href="{{ route('students.index') }}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                ✓ Update Student
+            </button>
+
+        </div>
+
+
+    </form>
+
+</div>
+
+@endsection
