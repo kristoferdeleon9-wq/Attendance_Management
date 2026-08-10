@@ -28,21 +28,19 @@ PAGE HEADER
 
 </div>
 
+<div class="page-actions">
 
-    <a
-        href="{{ route('students.create') }}"
-        class="btn btn-primary"
-    >
+    <a href="{{ route('students.create') }}" class="btn btn-primary">
         + Add Student
     </a>
 
-    <button
-        type="button"
-        class="btn btn-secondary"
-        onclick="document.getElementById('importModal').style.display='flex'"
-    >
-        ↑ Import Students
+    <button type="button"
+            class="btn-secondary"
+            onclick="openImportModal()">
+        Import Students
     </button>
+
+</div>
 
 </div>
 
@@ -330,11 +328,7 @@ STUDENT TABLE CARD
 IMPORT STUDENTS MODAL
 ========================================== --}}
 
-<div
-    id="importModal"
-    class="import-modal"
-    style="display: none;"
->
+<div id="importModal" class="import-modal" style="display: none;">
 
     <div class="import-modal-content">
 
@@ -344,16 +338,14 @@ IMPORT STUDENTS MODAL
                 <h2>Import Students</h2>
 
                 <p>
-                    Upload an Excel or CSV file containing student records.
+                    Upload an Excel file to add multiple students.
                 </p>
             </div>
 
-            <button
-                type="button"
-                class="close-modal"
-                onclick="document.getElementById('importModal').style.display='none'"
-            >
-                ×
+            <button type="button"
+                    class="close-modal"
+                    onclick="closeImportModal()">
+                &times;
             </button>
 
         </div>
@@ -364,42 +356,39 @@ IMPORT STUDENTS MODAL
             <h3>Excel Format</h3>
 
             <p>
-                Your first row must contain these column names:
+                Your Excel file must contain these columns:
             </p>
 
             <code>
-                student_id | first_name | last_name | email | course | year_level
+                student_id, first_name, last_name, email, course, year_level
             </code>
 
         </div>
 
 
-        <form
-            action="{{ route('students.import') }}"
-            method="POST"
-            enctype="multipart/form-data"
-        >
+        <form action="{{ route('students.import') }}"
+              method="POST"
+              enctype="multipart/form-data">
 
             @csrf
 
             <div class="file-upload">
 
-                <label for="studentFile">
+                <label for="student_file">
                     Select Excel File
                 </label>
 
                 <input
                     type="file"
+                    id="student_file"
                     name="file"
-                    id="studentFile"
                     accept=".xlsx,.xls,.csv"
                     required
                 >
 
                 <small>
                     Supported formats: .xlsx, .xls, .csv
-                    <br>
-                    Maximum file size: 5 MB
+                    (Maximum 5MB)
                 </small>
 
             </div>
@@ -407,18 +396,14 @@ IMPORT STUDENTS MODAL
 
             <div class="import-actions">
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="document.getElementById('importModal').style.display='none'"
-                >
+                <button type="button"
+                        class="btn-secondary"
+                        onclick="closeImportModal()">
                     Cancel
                 </button>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                >
+                <button type="submit"
+                        class="btn-primary">
                     Import Students
                 </button>
 
@@ -477,6 +462,26 @@ SEARCH SCRIPT
 
     }
 
+</script>
+
+<script>
+function openImportModal() {
+    document.getElementById('importModal').style.display = 'flex';
+}
+
+function closeImportModal() {
+    document.getElementById('importModal').style.display = 'none';
+}
+
+window.addEventListener('click', function(event) {
+
+    const modal = document.getElementById('importModal');
+
+    if (event.target === modal) {
+        closeImportModal();
+    }
+
+});
 </script>
 
 @endpush
