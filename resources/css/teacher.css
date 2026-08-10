@@ -1,0 +1,670 @@
+/* ==========================================
+   PAGE HEADER
+========================================== */
+
+.teacher-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.teacher-page-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 5px;
+}
+
+.teacher-page-header p {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+.teacher-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+
+/* ==========================================
+   ALERT
+========================================== */
+
+.alert-success {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #ecfdf5;
+    color: #166534;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 9px;
+
+    padding: 13px 15px;
+    margin-bottom: 20px;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   TABLE HEADER
+========================================== */
+
+.table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-header h2 {
+    font-size: 16px;
+    color: #111827;
+}
+
+.table-header p {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: 240px;
+
+    padding: 9px 12px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background: white;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.search-box span {
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f8fafc;
+}
+
+th {
+    padding: 13px 18px;
+
+    color: #6b7280;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+    padding: 15px 18px;
+
+    color: #374151;
+
+    font-size: 12px;
+
+    border-bottom: 1px solid #f1f5f9;
+}
+
+tbody tr {
+    transition: 0.15s;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* ==========================================
+   TEACHER
+========================================== */
+
+.teacher-id {
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+.teacher-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eef2ff;
+    color: #4f46e5;
+
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.name-info strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 12px;
+}
+
+.name-info span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+}
+
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.badge {
+    display: inline-flex;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.badge-blue {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.badge-purple {
+    background: #f3e8ff;
+    color: #9333ea;
+}
+
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.actions form {
+    margin: 0;
+}
+
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border-radius: 8px;
+
+    border: none;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: white;
+    color: #374151;
+
+    border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+    background: #f9fafb;
+}
+
+.btn-small {
+    min-height: 32px;
+    padding: 0 11px;
+}
+
+.btn-edit {
+    background: #ecfdf5;
+    color: #15803d;
+}
+
+.btn-edit:hover {
+    background: #dcfce7;
+}
+
+.btn-delete {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.btn-delete:hover {
+    background: #fee2e2;
+}
+
+
+/* ==========================================
+   BACK BUTTON
+========================================== */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 10px 15px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    background: white;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: #f8fafc;
+    color: #4f46e5;
+}
+
+
+/* ==========================================
+   FORM CARD
+========================================== */
+
+.teacher-form-card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+
+/* ==========================================
+   FORM HEADER
+========================================== */
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 22px 25px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.form-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f3e8ff;
+    color: #9333ea;
+
+    font-size: 20px;
+}
+
+.form-header h2 {
+    color: #111827;
+
+    font-size: 17px;
+
+    margin-bottom: 3px;
+}
+
+.form-header p {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   FORM BODY
+========================================== */
+
+.form-body {
+    padding: 25px;
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.error-box {
+    display: flex;
+    gap: 12px;
+
+    padding: 15px;
+    margin-bottom: 25px;
+
+    border: 1px solid #fecaca;
+    border-radius: 9px;
+
+    background: #fef2f2;
+
+    color: #991b1b;
+
+    font-size: 12px;
+}
+
+.error-icon {
+    width: 22px;
+    height: 22px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dc2626;
+    color: white;
+
+    font-weight: 700;
+}
+
+.error-box strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.error-box ul {
+    margin-left: 17px;
+}
+
+.error-box li {
+    margin-bottom: 2px;
+}
+
+.field-error {
+    color: #dc2626;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+
+/* ==========================================
+   FORM GRID
+========================================== */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 7px;
+
+    color: #374151;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.required {
+    color: #dc2626;
+}
+
+
+/* ==========================================
+   INPUT
+========================================== */
+
+.form-control {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background: white;
+
+    color: #111827;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.form-control::placeholder {
+    color: #9ca3af;
+}
+
+.form-control:focus {
+    border-color: #4f46e5;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+
+/* ==========================================
+   FORM FOOTER
+========================================== */
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 30px;
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.empty-state {
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f3e8ff;
+
+    font-size: 25px;
+}
+
+.empty-state h3 {
+    color: #111827;
+    font-size: 16px;
+}
+
+.empty-state p {
+    color: #6b7280;
+    font-size: 12px;
+    margin: 6px 0 18px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+    .teacher-page-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .teacher-page-header {
+        flex-direction: column;
+    }
+
+    .form-body {
+        padding: 18px;
+    }
+
+    .form-header {
+        padding: 18px;
+    }
+
+    .form-footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .form-footer .btn {
+        width: 100%;
+    }
+
+}

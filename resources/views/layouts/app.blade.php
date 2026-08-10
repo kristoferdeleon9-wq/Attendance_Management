@@ -72,8 +72,8 @@
             </a>
 
             <a
-                href="#"
-                class="menu-item"
+                href="{{ route('teachers.index') }}"
+                class="menu-item {{ request()->routeIs('teachers.*') ? 'active' : '' }}"
             >
                 <span>👨‍🏫</span>
                 Teachers

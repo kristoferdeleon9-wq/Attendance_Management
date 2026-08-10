@@ -85,7 +85,7 @@ STATISTICS
     </div>
 
     <h2>
-        0
+        {{ $totalTeachers }}
     </h2>
 
     <p class="dashboard-description">
@@ -93,7 +93,7 @@ STATISTICS
     </p>
 
     <a
-        href="#"
+        href="{{ route('teachers.index') }}"
         class="dashboard-link"
     >
         Manage teachers →
