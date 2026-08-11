@@ -19,11 +19,17 @@ class StudentController extends Controller
 
     public function create(Request $request)
     {
-        $section = \App\Models\Section::findOrFail(
-            $request->section_id
-        );
+        $sections = \App\Models\Section::orderBy('name')->get();
 
-        return view('students.create', compact('section'));
+        $section = null;
+
+        if ($request->filled('section_id')) {
+            $section = \App\Models\Section::findOrFail(
+                $request->section_id
+            );
+        }
+
+        return view('students.create', compact('sections', 'section'));
     }
 
     // Save student

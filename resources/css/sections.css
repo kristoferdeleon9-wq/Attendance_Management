@@ -510,3 +510,93 @@ RESPONSIVE
 }
 
 }
+
+/* =========================
+SECTION SHOW PAGE
+========================= */
+
+.student-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.table-title h2 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text);
+}
+
+.table-title p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-table th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    background: #fafafa;
+}
+
+.student-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.student-table tr:hover {
+    background: #fafbff;
+}
+
+/* Student name */
+
+.student-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name-info strong {
+    font-size: 13px;
+    color: var(--text);
+}
+
+.name-info span {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* Actions */
+
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+.actions form {
+    margin: 0;
+}

@@ -177,30 +177,48 @@
 
                 </div>
 
-                <div class="form-group">
+                    <div class="form-group">
 
-                    <label for="section">
-                        Section
-                    </label>
+                        <label for="section_id">
+                            Section
+                            <span class="required">*</span>
+                        </label>
 
-                    <input
-                        type="text"
-                        id="section"
-                        value="{{ $section->name }}"
-                        readonly
-                    >
+                        <select
+                            id="section_id"
+                            name="section_id"
+                            class="form-control"
+                            required
+                        >
 
-                    <input
-                        type="hidden"
-                        name="section_id"
-                        value="{{ $section->id }}"
-                    >
+                            <option value="">
+                                Select section
+                            </option>
 
-                    <small class="form-help">
-                        Student will be added to this section.
-                    </small>
+                            @foreach($sections as $item)
 
-                </div>
+                                <option
+                                    value="{{ $item->id }}"
+                                    {{ old('section_id', $section?->id) == $item->id ? 'selected' : '' }}
+                                >
+                                    {{ $item->name }}
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                        @error('section_id')
+                            <span class="field-error">
+                                {{ $message }}
+                            </span>
+                        @enderror
+
+                        <small class="form-help">
+                            Select the section where the student belongs.
+                        </small>
+
+                    </div>
 
 
                 {{-- EMAIL --}}
