@@ -77,7 +77,11 @@
                     </div>
 
                     <span class="section-badge">
-                        {{ $class->section }}
+                        {{ $class->section?->name ?? '—' }} 
+                    </span>
+                    <span class="section-badge">
+                        {{ $class->teacher?->first_name }}
+                        {{ $class->teacher?->last_name }}
                     </span>
 
                 </div>

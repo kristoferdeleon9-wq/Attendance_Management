@@ -75,21 +75,18 @@
 
         <div class="info-grid">
 
-
-            {{-- CLASS CODE --}}
-
+            {{-- CLASS NAME --}}
             <div class="info-item">
 
                 <span class="info-label">
-                    Class Code
+                    Class Name
                 </span>
 
                 <strong class="info-value">
-                    {{ $class->class_code ?? '—' }}
+                    {{ $class->class_name ?? '—' }}
                 </strong>
 
             </div>
-
 
             {{-- SUBJECT --}}
 
@@ -115,7 +112,26 @@
                 </span>
 
                 <strong class="info-value">
-                    {{ $class->section ?? '—' }}
+                    {{ $class->section?->name ?? '—' }}
+                </strong>
+
+            </div>
+
+            {{-- INSTRUCTOR --}}
+
+            <div class="info-item">
+
+                <span class="info-label">
+                    Instructor
+                </span>
+
+                <strong class="info-value">
+                    @if($class->teacher)
+                        {{ $class->teacher->first_name }}
+                        {{ $class->teacher->last_name }}
+                    @else
+                        —
+                    @endif
                 </strong>
 
             </div>

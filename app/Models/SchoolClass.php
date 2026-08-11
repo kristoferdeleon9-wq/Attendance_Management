@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Section;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,7 +16,7 @@ class SchoolClass extends Model
     protected $fillable = [
         'class_name',
         'subject',
-        'section',
+        'section_id',
         'schedule',
         'room',
         'description',
@@ -24,6 +26,11 @@ class SchoolClass extends Model
     public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 
     public function students(): BelongsToMany
@@ -43,4 +50,6 @@ class SchoolClass extends Model
             'class_id'
         );
     }
+
+    
 }

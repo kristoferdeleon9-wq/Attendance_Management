@@ -66,6 +66,7 @@ class SchoolClassController extends Controller
      */
     public function show(SchoolClass $class)
     {
+        $class->load(['section', 'teacher']);
         return view('classes.show', compact('class'));
     }
 

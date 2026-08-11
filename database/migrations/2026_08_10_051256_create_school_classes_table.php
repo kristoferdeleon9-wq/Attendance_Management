@@ -18,7 +18,13 @@ return new class extends Migration
 
         $table->string('subject');
 
-        $table->string('section');
+        $table->foreignId('section_id')
+        ->constrained('sections')
+        ->onDelete('cascade');
+
+        $table->foreignId('teacher_id')
+        ->constrained('teachers')
+        ->onDelete('cascade');
 
         $table->string('schedule')->nullable();
 
