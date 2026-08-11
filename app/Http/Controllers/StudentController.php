@@ -17,22 +17,26 @@ class StudentController extends Controller
         return view('students.index', compact('students'));
     }
 
-    // Show create form
-    public function create()
+    public function create(Request $request)
     {
-        return view('students.create');
+        $section = \App\Models\Section::findOrFail(
+            $request->section_id
+        );
+
+        return view('students.create', compact('section'));
     }
 
     // Save student
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'student_id' => 'required|unique:students,student_id',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'nullable|email',
-            'course' => 'nullable',
-            'year_level' => 'nullable',
+            'student_id' => 'required|string|max:255|unique:students,student_id',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'course' => 'required|string|max:255',
+            'year_level' => 'required|string|max:100',
+            'section_id' => 'required|exists:sections,id',
         ]);
 
         Student::create($validated);

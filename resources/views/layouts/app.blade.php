@@ -64,11 +64,11 @@
             </p>
 
             <a
-                href="{{ route('students.index') }}"
-                class="menu-item {{ request()->routeIs('students.*') ? 'active' : '' }}"
+                href="{{ route('sections.index') }}"
+                class="menu-item {{ request()->routeIs('sections.*') ? 'active' : '' }}"
             >
-                <span>👥</span>
-                Students
+                <span>�</span>
+                Sections
             </a>
 
             <a
@@ -101,8 +101,8 @@
             </a>
 
             <a
-                href="#"
-                class="menu-item"
+                href="{{ route('attendance.index') }}"
+                class="menu-item {{ request()->routeIs('attendance.*') ? 'active' : '' }}"
             >
                 <span>✓</span>
                 Attendance
