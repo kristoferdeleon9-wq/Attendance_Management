@@ -53,7 +53,7 @@
                         >
                             {{ $class->class_name }}
                             @if($class->section)
-                                - {{ $class->section }}
+                                - {{ $class->section->name }}
                             @endif
                         </option>
                     @endforeach
@@ -98,8 +98,8 @@
 
             <p>
                 {{ $schoolClass->subject }}
-                @if($schoolClass->section)
-                    • Section {{ $schoolClass->section }}
+                @if($schoolClass->section?->name)
+                    • Section {{ $schoolClass->section?->name }}
                 @endif
             </p>
         </div>

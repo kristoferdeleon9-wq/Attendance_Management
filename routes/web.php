@@ -37,3 +37,21 @@ Route::put('/attendance/{attendance}', [AttendanceController::class, 'update'])
 
 Route::post('/students/{student}/assign-section', [StudentController::class, 'assignSection'])
     ->name('students.assign-section');
+
+Route::get('/attendance', [AttendanceController::class, 'index'])
+    ->name('attendance.index');
+
+Route::post('/attendance', [AttendanceController::class, 'store'])
+    ->name('attendance.store');
+
+Route::post('/attendance/session/start', [AttendanceSessionController::class, 'start'])
+    ->name('attendance.session.start');
+
+Route::post('/attendance/session/end', [AttendanceSessionController::class, 'end'])
+    ->name('attendance.session.end');
+
+Route::get('/attendance/scanner/{class}', [QrScannerController::class, 'index'])
+    ->name('attendance.scanner');
+
+Route::post('/attendance/scanner/scan', [QrScannerController::class, 'scan'])
+    ->name('attendance.scan');
