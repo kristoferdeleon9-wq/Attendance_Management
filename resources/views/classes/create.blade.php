@@ -150,27 +150,80 @@
 
                 <div class="form-group">
 
-                    <label for="section">
+                    <label for="section_id">
                         Section
                         <span class="required">*</span>
                     </label>
 
-                    <input
-                        type="text"
-                        id="section"
-                        name="section"
+                    <select
+                        id="section_id"
+                        name="section_id"
                         class="form-control"
-                        value="{{ old('section') }}"
-                        placeholder="e.g. BSIT 4A"
                         required
                     >
 
-                    @error('section')
+                        <option value="">
+                            Select Section
+                        </option>
 
+                        @foreach($sections as $section)
+
+                            <option
+                                value="{{ $section->id }}"
+                                {{ old('section_id') == $section->id ? 'selected' : '' }}
+                            >
+                                {{ $section->name }}
+                                — {{ $section->year_level }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                    @error('section_id')
                         <span class="field-error">
                             {{ $message }}
                         </span>
+                    @enderror
 
+                </div>
+
+                <div class="form-group">
+
+                    <label for="teacher_id">
+                        Instructor
+                        <span class="required">*</span>
+                    </label>
+
+                    <select
+                        id="teacher_id"
+                        name="teacher_id"
+                        class="form-control"
+                        required
+                    >
+
+                        <option value="">
+                            Select Instructor
+                        </option>
+
+                        @foreach($teachers as $teacher)
+
+                            <option
+                                value="{{ $teacher->id }}"
+                                {{ old('teacher_id') == $teacher->id ? 'selected' : '' }}
+                            >
+                                {{ $teacher->first_name }}
+                                {{ $teacher->last_name }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                    @error('teacher_id')
+                        <span class="field-error">
+                            {{ $message }}
+                        </span>
                     @enderror
 
                 </div>

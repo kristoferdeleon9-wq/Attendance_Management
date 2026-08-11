@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\SchoolClass;
+use App\Models\Section;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
@@ -23,7 +25,10 @@ class SchoolClassController extends Controller
      */
     public function create()
     {
-        return view('classes.create');
+        $sections = Section::orderBy('name')->get();
+        $teachers = Teacher::orderBy('last_name')->get();
+
+        return view('classes.create', compact('sections', 'teachers'));
     }
 
 
@@ -37,7 +42,9 @@ class SchoolClassController extends Controller
 
             'subject' => 'required|string|max:255',
 
-            'section' => 'required|string|max:100',
+            'section_id' => 'required|exists:sections,id',
+            
+            'teacher_id' => 'required|exists:teachers,id',
 
             'schedule' => 'nullable|string|max:255',
 
