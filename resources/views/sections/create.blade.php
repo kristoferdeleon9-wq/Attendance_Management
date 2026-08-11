@@ -4,6 +4,10 @@
 
 @section('page-title', 'Create Section')
 
+@push('styles')
+    @vite('resources/css/sections.css')
+@endpush
+
 @section('content')
 
 <div class="form-card">

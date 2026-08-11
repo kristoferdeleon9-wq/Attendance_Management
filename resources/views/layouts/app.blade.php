@@ -64,6 +64,14 @@
             </p>
 
             <a
+                href="{{ route('students.index') }}"
+                class="menu-item {{ request()->routeIs('students.*') ? 'active' : '' }}"
+            >
+                <span>👨‍🎓</span>
+                Students
+            </a>
+
+            <a
                 href="{{ route('sections.index') }}"
                 class="menu-item {{ request()->routeIs('sections.*') ? 'active' : '' }}"
             >

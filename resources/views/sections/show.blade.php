@@ -4,6 +4,10 @@
 
 @section('page-title', $section->name)
 
+@push('styles')
+    @vite('resources/css/sections.css')
+@endpush
+
 @section('content')
 
 <div class="section-header">

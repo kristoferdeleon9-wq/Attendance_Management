@@ -177,6 +177,31 @@
 
                 </div>
 
+                <div class="form-group">
+
+                    <label for="section">
+                        Section
+                    </label>
+
+                    <input
+                        type="text"
+                        id="section"
+                        value="{{ $section->name }}"
+                        readonly
+                    >
+
+                    <input
+                        type="hidden"
+                        name="section_id"
+                        value="{{ $section->id }}"
+                    >
+
+                    <small class="form-help">
+                        Student will be added to this section.
+                    </small>
+
+                </div>
+
 
                 {{-- EMAIL --}}
 
