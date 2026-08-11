@@ -539,3 +539,12 @@
 
     margin-top: 20px;
 }
+
+.btn-qr {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.btn-qr:hover {
+    background: #d1fae5;
+}

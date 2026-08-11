@@ -9,6 +9,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\AttendanceSessionController;
 use App\Http\Controllers\QrScannerController;
+use App\Http\Controllers\StudentQrController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
@@ -28,6 +29,9 @@ Route::resource('classes', SchoolClassController::class);
 
 Route::resource('teachers', TeacherController::class);
 
+Route::get('/students/{student}/qr', [StudentQrController::class, 'show'])
+    ->name('students.qr');
+
 Route::get('/attendance', [AttendanceController::class, 'index'])
     ->name('attendance.index');
 
@@ -42,6 +46,9 @@ Route::post('/students/{student}/assign-section', [StudentController::class, 'as
 
 Route::post('/attendance/session/start', [AttendanceSessionController::class, 'start'])
     ->name('attendance.session.start');
+
+Route::get('/attendance/session/{session}', [AttendanceSessionController::class, 'show'])
+    ->name('attendance.session');
 
 Route::post('/attendance/session/end', [AttendanceSessionController::class, 'end'])
     ->name('attendance.session.end');

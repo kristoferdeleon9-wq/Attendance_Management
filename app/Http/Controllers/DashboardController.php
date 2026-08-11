@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use App\Models\ClassModel;
+use App\Models\SchoolClass;
 use App\Models\Teacher;
 
 class DashboardController extends Controller
@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $totalStudents = Student::count();
         $totalTeachers = Teacher::count();
-        $totalClasses = ClassModel::count();
+        $totalClasses = SchoolClass::count();
 
         return view('dashboard', compact(
             'totalStudents',

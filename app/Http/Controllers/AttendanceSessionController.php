@@ -68,6 +68,7 @@ class AttendanceSessionController extends Controller
     public function show(AttendanceSession $session)
     {
         $session->load([
+            'schoolClass',
             'schoolClass.teacher',
             'schoolClass.section',
         ]);

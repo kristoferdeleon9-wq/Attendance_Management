@@ -5,7 +5,23 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/css/attendance-scanner.css',
+                'resources/css/attendance-session.css',
+                'resources/css/attendance.css',
+                'resources/css/class-create.css',
+                'resources/css/class-show.css',
+                'resources/css/classes.css',
+                'resources/css/dashboard.css',
+                'resources/css/reports.css',
+                'resources/css/sections.css',
+                'resources/css/student-create.css',
+                'resources/css/student-qr.css',
+                'resources/css/students.css',
+                'resources/css/teacher.css',
+                'resources/js/app.js'
+            ],
             refresh: true,
         }),
         tailwindcss(),

@@ -250,6 +250,13 @@ STUDENT TABLE CARD
                             <div class="actions">
 
                                 <a
+                                    href="{{ route('students.qr', $student) }}"
+                                    class="btn btn-small btn-qr"
+                                >
+                                    QR Code
+                                </a>
+
+                                <a
                                     href="{{ route('students.edit', $student) }}"
                                     class="btn btn-small btn-edit"
                                 >
