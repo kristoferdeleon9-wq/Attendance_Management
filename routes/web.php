@@ -7,6 +7,8 @@ use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\AttendanceSessionController;
+use App\Http\Controllers\QrScannerController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
@@ -37,12 +39,6 @@ Route::put('/attendance/{attendance}', [AttendanceController::class, 'update'])
 
 Route::post('/students/{student}/assign-section', [StudentController::class, 'assignSection'])
     ->name('students.assign-section');
-
-Route::get('/attendance', [AttendanceController::class, 'index'])
-    ->name('attendance.index');
-
-Route::post('/attendance', [AttendanceController::class, 'store'])
-    ->name('attendance.store');
 
 Route::post('/attendance/session/start', [AttendanceSessionController::class, 'start'])
     ->name('attendance.session.start');

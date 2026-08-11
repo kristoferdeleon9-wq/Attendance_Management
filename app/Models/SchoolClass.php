@@ -50,6 +50,14 @@ class SchoolClass extends Model
             'class_id'
         );
     }
+    
+    public function attendanceSessions(): HasMany
+    {
+        return $this->hasMany(
+            AttendanceSession::class,
+            'class_id'
+        );
+    }
 
     
 }

@@ -213,6 +213,44 @@
 
     <div class="class-actions">
 
+    {{-- START ATTENDANCE --}}
+    <form
+        action="{{ route('attendance.session.start') }}"
+        method="POST"
+        class="class-action-form"
+    >
+        @csrf
+
+        <input
+            type="hidden"
+            name="class_id"
+            value="{{ $class->id }}"
+        >
+
+        <button
+            type="submit"
+            class="class-action"
+        >
+            <div class="action-icon blue">
+                ▶
+            </div>
+
+            <div class="action-content">
+                <strong>
+                    Start Attendance
+                </strong>
+
+                <span>
+                    Start a new attendance session for this class
+                </span>
+            </div>
+
+            <span class="action-arrow">
+                →
+            </span>
+        </button>
+    </form>
+
 
         {{-- QR SCANNER --}}
 
