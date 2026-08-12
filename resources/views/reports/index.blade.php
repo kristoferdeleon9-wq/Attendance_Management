@@ -161,10 +161,14 @@
 
         @if($attendanceSession)
 
-            <div class="report-session-info">
+            <div class="session-summary">
 
-                <div>
-                    <span>Attendance Opened</span>
+                {{-- ATTENDANCE OPENED --}}
+                <div class="session-info">
+
+                    <span class="session-info-label">
+                        ATTENDANCE OPENED
+                    </span>
 
                     <strong>
                         {{ $attendanceSession->started_at
@@ -172,25 +176,45 @@
                             : '—'
                         }}
                     </strong>
+
                 </div>
 
-                <div>
-                    <span>Attendance Closed</span>
+
+                {{-- ATTENDANCE CLOSED --}}
+                <div class="session-info">
+
+                    <span class="session-info-label">
+                        ATTENDANCE CLOSED
+                    </span>
 
                     <strong>
                         {{ $attendanceSession->ended_at
                             ? $attendanceSession->ended_at->format('h:i A')
-                            : 'Still Open'
+                            : '—'
                         }}
                     </strong>
+
                 </div>
 
-                <div>
-                    <span>Session Status</span>
 
-                    <strong>
+                {{-- SESSION STATUS --}}
+                <div class="session-info">
+
+                    <span class="session-info-label">
+                        SESSION STATUS
+                    </span>
+
+                    <strong
+                        class="
+                            {{ $attendanceSession->status === 'open'
+                                ? 'status-open'
+                                : 'status-closed'
+                            }}
+                        "
+                    >
                         {{ ucfirst($attendanceSession->status) }}
                     </strong>
+
                 </div>
 
             </div>

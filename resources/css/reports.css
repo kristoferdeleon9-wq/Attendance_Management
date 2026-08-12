@@ -550,3 +550,114 @@
     }
 
 }
+
+/* ==========================================
+   SESSION SUMMARY
+========================================== */
+
+.session-summary {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin: 20px 0;
+}
+
+
+/* ==========================================
+   SESSION CARD
+========================================== */
+
+.session-info {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-height: 85px;
+
+    padding: 16px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+
+/* ==========================================
+   LABEL
+========================================== */
+
+.session-info-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.4px;
+
+    text-transform: uppercase;
+}
+
+
+/* ==========================================
+   VALUE
+========================================== */
+
+.session-info strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.session-info strong.status-open {
+    color: #10b981;
+}
+
+.session-info strong.status-closed {
+    color: #111827;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .session-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .session-summary {
+        grid-template-columns: 1fr;
+    }
+
+}
