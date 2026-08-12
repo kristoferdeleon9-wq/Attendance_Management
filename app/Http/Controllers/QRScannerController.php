@@ -25,17 +25,17 @@ class QrScannerController extends Controller
             'class_id',
             $class->id
         )
-            ->whereDate(
-                'attendance_date',
-                today()
-            )
-            ->where('status', 'open')
-            ->latest()
-            ->first();
+        ->whereDate(
+            'attendance_date',
+            today()
+        )
+        ->where('status', 'open')
+        ->latest()
+        ->first();
 
         if (!$session) {
             return redirect()
-                ->route('attendance.index')
+                ->route('classes.show', $class)
                 ->with(
                     'error',
                     'There is no active attendance session for this class.'
@@ -51,41 +51,17 @@ class QrScannerController extends Controller
         );
     }
 
+
     /**
      * Process QR code.
      */
     public function scan(Request $request)
     {
-
-        $now = now();
-
-        $startTime = today()->setTimeFromTimeString(
-            $class->start_time
-        );
-
-        $endTime = today()->setTimeFromTimeString(
-            $class->end_time
-        );
-
-        if ($now->lt($startTime)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Attendance has not started yet.'
-            ], 422);
-        }
-
-        if ($now->gte($endTime)) {
-
-            $session->update([
-                'status' => 'closed',
-                'ended_at' => now(),
-            ]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'The class attendance period has ended.'
-            ], 422);
-        }
+        /*
+        |--------------------------------------------------------------------------
+        | Validate QR scan request
+        |--------------------------------------------------------------------------
+        */
 
         $request->validate([
             'class_id' => 'required|exists:classes,id',
@@ -93,13 +69,28 @@ class QrScannerController extends Controller
             'student_id' => 'required|string',
         ]);
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Get class
+        |--------------------------------------------------------------------------
+        */
+
         $class = SchoolClass::findOrFail(
             $request->class_id
         );
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Get attendance session
+        |--------------------------------------------------------------------------
+        */
+
         $session = AttendanceSession::findOrFail(
             $request->session_id
         );
+
 
         /*
         |--------------------------------------------------------------------------
@@ -113,10 +104,10 @@ class QrScannerController extends Controller
         ) {
             return response()->json([
                 'success' => false,
-                'message' => 'Attendance session is not active.',
-                'debug' => [ 'class_id' => $class->id, 'session_class_id' => $session->class_id, 'session_status' => $session->status, ],
+                'message' => 'Attendance session is not active.'
             ], 422);
         }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -124,41 +115,49 @@ class QrScannerController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $qrValue = trim($request->student_id);
-
         $student = Student::where(
             'student_id',
-            $qrValue
+            $request->student_id
         )->first();
+
 
         if (!$student) {
             return response()->json([
                 'success' => false,
-                'message' => 'Student not found.',
-                'debug' => [ 'qr_value' => $qrValue, ],
+                'message' => 'Student not found.'
             ], 404);
         }
 
+
         /*
         |--------------------------------------------------------------------------
-        | Check if student belongs to class
+        | SECTION ENROLLMENT
         |--------------------------------------------------------------------------
+        |
+        | Student does NOT need to exist in class_student.
+        |
+        | The student must belong to the same section as the class.
+        |
         */
 
         if (
             !$class->section_id ||
-            !$student->section_id ||
             $student->section_id != $class->section_id
         ) {
             return response()->json([
                 'success' => false,
-                'message' => 'This student does not belong to this class section.',
+                'message' => 'This student is not enrolled in this class section.',
                 'debug' => [
+                    'student_database_id' => $student->id,
+                    'student_id' => $student->student_id,
                     'student_section_id' => $student->section_id,
+                    'class_id' => $class->id,
                     'class_section_id' => $class->section_id,
-                ],
+                    'class_name' => $class->class_name,
+                ]
             ], 422);
         }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -170,15 +169,16 @@ class QrScannerController extends Controller
             'student_id',
             $student->id
         )
-            ->where(
-                'class_id',
-                $class->id
-            )
-            ->whereDate(
-                'attendance_date',
-                $session->attendance_date
-            )
-            ->first();
+        ->where(
+            'class_id',
+            $class->id
+        )
+        ->whereDate(
+            'attendance_date',
+            $session->attendance_date
+        )
+        ->first();
+
 
         if ($existingAttendance) {
             return response()->json([
@@ -187,26 +187,29 @@ class QrScannerController extends Controller
                 'message' => 'Attendance already recorded.',
                 'student' => [
                     'student_id' => $student->student_id,
-                    'name' => $student->first_name .
+
+                    'name' =>
+                        $student->first_name .
                         ' ' .
                         $student->last_name,
-                    'time_in' => $existingAttendance->time_in,
-                    'status' => ucfirst(
-                        $existingAttendance->status
-                    ),
+
+                    'time_in' =>
+                        $existingAttendance->time_in,
+
+                    'status' =>
+                        ucfirst(
+                            $existingAttendance->status
+                        ),
                 ],
             ]);
         }
+
 
         /*
         |--------------------------------------------------------------------------
         | Record attendance
         |--------------------------------------------------------------------------
         */
-
-        $status = now()->lte($startTime)
-        ? 'present'
-        : 'late';
 
         $attendance = Attendance::create([
             'student_id' => $student->id,
@@ -216,16 +219,33 @@ class QrScannerController extends Controller
             'status' => 'present',
         ]);
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Success response
+        |--------------------------------------------------------------------------
+        */
+
         return response()->json([
             'success' => true,
-            'message' => 'Attendance recorded successfully.',
+
+            'message' =>
+                'Attendance recorded successfully.',
+
             'student' => [
-                'student_id' => $student->student_id,
-                'name' => $student->first_name .
+                'student_id' =>
+                    $student->student_id,
+
+                'name' =>
+                    $student->first_name .
                     ' ' .
                     $student->last_name,
-                'time_in' => $attendance->time_in,
-                'status' => 'Present',
+
+                'time_in' =>
+                    $attendance->time_in,
+
+                'status' =>
+                    'Present',
             ],
         ]);
     }

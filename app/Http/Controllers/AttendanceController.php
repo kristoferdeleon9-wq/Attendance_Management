@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\AttendanceSession;
 
 class AttendanceController extends Controller
 {
@@ -27,6 +28,7 @@ class AttendanceController extends Controller
             ?? Carbon::today()->toDateString();
 
         $schoolClass = null;
+        $attendanceSession = null;
         $students = collect();
         $attendances = collect();
 
@@ -71,12 +73,20 @@ class AttendanceController extends Controller
                 ->keyBy('student_id');
         }
 
+        if ($schoolClass) {
+            $attendanceSession = AttendanceSession::where('class_id', $schoolClass->id)
+                ->whereDate('attendance_date', $date)
+                ->latest('id')
+                ->first();
+        }
+
         return view('attendance.index', compact(
             'classes',
             'schoolClass',
             'students',
             'attendances',
-            'date'
+            'date',
+            'attendanceSession'
         ));
     }
 

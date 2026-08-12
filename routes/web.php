@@ -10,6 +10,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\AttendanceSessionController;
 use App\Http\Controllers\QrScannerController;
 use App\Http\Controllers\StudentQrController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
@@ -58,3 +59,6 @@ Route::get('/attendance/scanner/{class}', [QrScannerController::class, 'index'])
 
 Route::post('/attendance/scanner/scan', [QrScannerController::class, 'scan'])
     ->name('attendance.scan');
+
+Route::get('/reports', [ReportController::class, 'index'])
+    ->name('reports.index');

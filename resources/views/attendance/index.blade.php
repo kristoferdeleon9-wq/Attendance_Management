@@ -106,6 +106,42 @@
 
     </div>
 
+    @if($attendanceSession)
+    <div class="attendance-session-info">
+
+        <div class="session-info-item">
+            <span class="session-label">Attendance Opened</span>
+
+            <strong>
+                {{ $attendanceSession->started_at
+                    ? $attendanceSession->started_at->format('h:i A')
+                    : '—'
+                }}
+            </strong>
+        </div>
+
+        <div class="session-info-item">
+            <span class="session-label">Attendance Closed</span>
+
+            <strong>
+                {{ $attendanceSession->ended_at
+                    ? $attendanceSession->ended_at->format('h:i A')
+                    : 'Still Open'
+                }}
+            </strong>
+        </div>
+
+        <div class="session-info-item">
+            <span class="session-label">Session Status</span>
+
+            <strong>
+                {{ ucfirst($attendanceSession->status) }}
+            </strong>
+        </div>
+
+    </div>
+@endif
+
 
     {{-- ATTENDANCE SUMMARY --}}
     <div class="attendance-summary">

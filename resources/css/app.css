@@ -136,6 +136,9 @@ body {
     margin-left: 250px;
     width: calc(100% - 250px);
     min-height: 100vh;
+    transition:
+        margin-left 0.25s ease,
+        width 0.25s ease;
 }
 
 /* =========================
@@ -241,5 +244,242 @@ body {
 
     .page-content {
         padding: 20px;
+    }
+}
+
+/* ==========================================
+   SIDEBAR TOGGLE BUTTON
+========================================== */
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sidebar-toggle {
+    width: 40px;
+    height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    background: white;
+    color: #374151;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.sidebar-toggle:hover {
+    background: #f8fafc;
+    color: #4f46e5;
+}
+
+
+/* ==========================================
+   SIDEBAR TRANSITION
+========================================== */
+
+.sidebar {
+    transition:
+        width 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* ==========================================
+   COLLAPSED SIDEBAR
+========================================== */
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed ~ .main-content {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
+
+/* Hide logo text */
+.sidebar.collapsed .sidebar-logo > div:not(.logo-icon) {
+    display: none;
+}
+
+/* Center logo */
+.sidebar.collapsed .sidebar-logo {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Hide section titles */
+.sidebar.collapsed .menu-title {
+    display: none;
+}
+
+/* Menu items */
+.sidebar.collapsed .menu-item {
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 14px 0;
+
+    gap: 0;
+}
+
+/* Hide menu text */
+.sidebar.collapsed .menu-item {
+    font-size: 0;
+}
+
+/* Keep icons visible */
+.sidebar.collapsed .menu-item span {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+}
+
+/* User footer */
+.sidebar.collapsed .sidebar-footer {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Hide administrator text */
+.sidebar.collapsed .user-info {
+    display: none;
+}
+
+/* Center avatar */
+.sidebar.collapsed .user-avatar {
+    margin: 0;
+}
+
+.sidebar.collapsed .sidebar-menu {
+    padding-top: 15px;
+}
+
+.sidebar.collapsed .menu-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* ==========================================
+   MAIN CONTENT TRANSITION
+========================================== */
+
+.main-content {
+    transition: margin-left 0.25s ease;
+}
+
+
+/* ==========================================
+   MOBILE OVERLAY
+========================================== */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(15, 23, 42, 0.45);
+
+    z-index: 998;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        width: 260px;
+
+        transform: translateX(-100%);
+
+        transition: transform 0.25s ease;
+
+        z-index: 999;
+    }
+
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+
+    /* Ignore collapsed desktop mode on phone */
+
+    .sidebar.collapsed {
+        width: 260px;
+        transform: translateX(-100%);
+    }
+
+
+    .sidebar.collapsed.mobile-open {
+        transform: translateX(0);
+    }
+
+
+    /* Main takes entire phone */
+
+    .main-content,
+    .sidebar.collapsed ~ .main-content {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+
+
+    .topbar {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+
+    .topbar-left {
+        gap: 10px;
+    }
+
+
+    .sidebar-toggle {
+        width: 38px;
+        height: 38px;
+
+        flex-shrink: 0;
+    }
+
+
+    .page-content {
+        padding: 20px 15px;
     }
 }

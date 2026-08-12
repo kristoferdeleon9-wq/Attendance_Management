@@ -28,7 +28,7 @@
          SIDEBAR
     =========================================== --}}
 
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
 
         <div class="sidebar-logo">
 
@@ -109,8 +109,8 @@
             </a>
 
             <a
-                href="#"
-                class="menu-item"
+                href="{{ route('reports.index') }}"
+                class="menu-item {{ request()->routeIs('reports.*') ? 'active' : '' }}"
             >
                 <span>📊</span>
                 Reports
@@ -154,6 +154,8 @@
 
     </aside>
 
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 
     {{-- ==========================================
          MAIN CONTENT
@@ -166,13 +168,22 @@
 
         <header class="topbar">
 
-            <div>
+    <div class="topbar-left">
 
-                <h3>
-                    @yield('page-title', 'Dashboard')
-                </h3>
+        <button
+            type="button"
+            id="sidebarToggle"
+            class="sidebar-toggle"
+            aria-label="Toggle navigation"
+        >
+            ☰
+        </button>
 
-            </div>
+        <h3>
+            @yield('page-title', 'Dashboard')
+        </h3>
+
+    </div>
 
 
             <div class="topbar-right">
@@ -219,6 +230,71 @@
     </main>
 
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.getElementById('sidebarToggle');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    if (!sidebar || !toggle) {
+        return;
+    }
+
+    toggle.addEventListener('click', function () {
+
+        if (window.innerWidth <= 700) {
+
+            sidebar.classList.toggle('mobile-open');
+
+            if (overlay) {
+                overlay.classList.toggle('show');
+            }
+
+        } else {
+
+            sidebar.classList.toggle('collapsed');
+
+        }
+
+    });
+
+
+    // Close sidebar when clicking outside on phone
+    if (overlay) {
+
+        overlay.addEventListener('click', function () {
+
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('show');
+
+        });
+
+    }
+
+
+    // Close mobile sidebar when clicking a menu item
+    document.querySelectorAll('.sidebar .menu-item').forEach(function (item) {
+
+        item.addEventListener('click', function () {
+
+            if (window.innerWidth <= 700) {
+
+                sidebar.classList.remove('mobile-open');
+
+                if (overlay) {
+                    overlay.classList.remove('show');
+                }
+
+            }
+
+        });
+
+    });
+
+});
+</script>
+
 @stack('scripts')
 </body>
 
