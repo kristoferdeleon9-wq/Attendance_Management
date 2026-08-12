@@ -46,10 +46,6 @@ class SchoolClassController extends Controller
             
             'teacher_id' => 'required|exists:teachers,id',
 
-            'start_time' => 'required|date_format:H:i',
-
-                'end_time' => 'required|date_format:H:i|after:start_time',
-
             'schedule' => 'nullable|string|max:255',
 
             'room' => 'nullable|string|max:100',
@@ -94,7 +90,7 @@ class SchoolClassController extends Controller
 
             'subject' => 'required|string|max:255',
 
-            'section' => 'required|string|max:100',
+            'section_id' => 'required|exists:sections,id',
 
             'schedule' => 'nullable|string|max:255',
 

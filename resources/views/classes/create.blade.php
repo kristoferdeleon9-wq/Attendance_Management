@@ -246,30 +246,6 @@
 
                 </div>
 
-                <div class="form-group">
-                    <label for="start_time">Start Time</label>
-
-                    <input
-                        type="time"
-                        name="start_time"
-                        id="start_time"
-                        value="{{ old('start_time') }}"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="end_time">End Time</label>
-
-                    <input
-                        type="time"
-                        name="end_time"
-                        id="end_time"
-                        value="{{ old('end_time') }}"
-                        required
-                    >
-                </div>
-
 
                 <div class="form-group form-full">
 

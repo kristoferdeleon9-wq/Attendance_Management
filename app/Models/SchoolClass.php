@@ -18,8 +18,6 @@ class SchoolClass extends Model
         'subject',
         'section_id',
         'schedule',
-        'start_time',
-        'end_time',
         'room',
         'description',
         'teacher_id',
