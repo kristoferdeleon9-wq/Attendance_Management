@@ -101,14 +101,6 @@
             </p>
 
             <a
-                href="#"
-                class="menu-item"
-            >
-                <span>▣</span>
-                QR Scanner
-            </a>
-
-            <a
                 href="{{ route('attendance.index') }}"
                 class="menu-item {{ request()->routeIs('attendance.*') ? 'active' : '' }}"
             >

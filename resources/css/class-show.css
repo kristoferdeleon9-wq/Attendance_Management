@@ -435,3 +435,16 @@
     }
 
 }
+
+.class-action-form {
+    margin: 0;
+}
+
+.class-action-form .class-action {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}

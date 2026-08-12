@@ -213,7 +213,7 @@
 
     <div class="class-actions">
 
-    {{-- START ATTENDANCE --}}
+    {{-- OPEN ATTENDANCE --}}
     <form
         action="{{ route('attendance.session.start') }}"
         method="POST"
@@ -237,11 +237,11 @@
 
             <div class="action-content">
                 <strong>
-                    Start Attendance
+                    Open Attendance
                 </strong>
 
                 <span>
-                    Start a new attendance session for this class
+                    Open a new attendance session for this class
                 </span>
             </div>
 
@@ -252,97 +252,56 @@
     </form>
 
 
-        {{-- QR SCANNER --}}
+    {{-- VIEW ATTENDANCE --}}
+    <a
+        href="{{ route('attendance.index', ['class_id' => $class->id]) }}"
+        class="class-action"
+    >
+        <div class="action-icon green">
+            ✓
+        </div>
 
-        <a
-            href="#"
-            class="class-action"
-        >
+        <div class="action-content">
+            <strong>
+                View Attendance
+            </strong>
 
-            <div class="action-icon blue">
-                ▣
-            </div>
-
-            <div class="action-content">
-
-                <strong>
-                    Open QR Scanner
-                </strong>
-
-                <span>
-                    Scan student QR codes for attendance
-                </span>
-
-            </div>
-
-            <span class="action-arrow">
-                →
+            <span>
+                View attendance records for this class
             </span>
+        </div>
 
-        </a>
+        <span class="action-arrow">
+            →
+        </span>
+    </a>
 
 
-        {{-- ATTENDANCE --}}
+    {{-- EDIT CLASS --}}
+    <a
+        href="{{ route('classes.edit', $class) }}"
+        class="class-action"
+    >
+        <div class="action-icon purple">
+            ✏️
+        </div>
 
-        <a
-            href="#"
-            class="class-action"
-        >
+        <div class="action-content">
+            <strong>
+                Edit Class
+            </strong>
 
-            <div class="action-icon green">
-                ✓
-            </div>
-
-            <div class="action-content">
-
-                <strong>
-                    View Attendance
-                </strong>
-
-                <span>
-                    View attendance records for this class
-                </span>
-
-            </div>
-
-            <span class="action-arrow">
-                →
+            <span>
+                Update class information
             </span>
+        </div>
 
-        </a>
+        <span class="action-arrow">
+            →
+        </span>
+    </a>
 
-
-        {{-- EDIT --}}
-
-        <a
-            href="{{ route('classes.edit', $class) }}"
-            class="class-action"
-        >
-
-            <div class="action-icon purple">
-                ✏️
-            </div>
-
-            <div class="action-content">
-
-                <strong>
-                    Edit Class
-                </strong>
-
-                <span>
-                    Update class information
-                </span>
-
-            </div>
-
-            <span class="action-arrow">
-                →
-            </span>
-
-        </a>
-
-
-    </div>
+</div>
 
 </div>
 

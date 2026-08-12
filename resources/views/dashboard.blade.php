@@ -252,32 +252,6 @@ SECOND SECTION
         </a>
 
 
-        {{-- QR SCANNER --}}
-
-        <a
-            href="#"
-            class="quick-action"
-        >
-
-            <div class="quick-icon green">
-                ▣
-            </div>
-
-            <div>
-
-                <strong>
-                    Open QR Scanner
-                </strong>
-
-                <span>
-                    Scan student attendance
-                </span>
-
-            </div>
-
-        </a>
-
-
         {{-- REPORT --}}
 
         <a
