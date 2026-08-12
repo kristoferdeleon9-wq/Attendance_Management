@@ -70,10 +70,7 @@ class AttendanceSessionController extends Controller
         if ($session->status === 'closed') {
             return redirect()
                 ->route('attendance.index')
-                ->with(
-                    'info',
-                    'This attendance session is already closed.'
-                );
+                ->with('info', 'This attendance session is already closed.');
         }
 
         $session->update([

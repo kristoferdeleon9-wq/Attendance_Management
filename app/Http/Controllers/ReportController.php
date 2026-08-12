@@ -67,7 +67,10 @@ class ReportController extends Controller
 
         $attendanceSession = $schoolClass
             ? AttendanceSession::where('class_id', $schoolClass->id)
-                ->whereDate('attendance_date', $date)
+                ->whereBetween('attendance_date', [
+                    $dateFrom,
+                    $dateTo
+                ])
                 ->latest('id')
                 ->first()
             : null;

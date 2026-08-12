@@ -51,7 +51,7 @@ Route::post('/attendance/session/start', [AttendanceSessionController::class, 's
 Route::get('/attendance/session/{session}', [AttendanceSessionController::class, 'show'])
     ->name('attendance.session');
 
-Route::post('/attendance/session/end', [AttendanceSessionController::class, 'end'])
+Route::post('/attendance/session/{session}/end', [AttendanceSessionController::class, 'end'])
     ->name('attendance.session.end');
 
 Route::get('/attendance/scanner/{class}', [QrScannerController::class, 'index'])
