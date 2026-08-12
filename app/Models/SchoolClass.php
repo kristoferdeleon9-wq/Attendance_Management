@@ -18,9 +18,16 @@ class SchoolClass extends Model
         'subject',
         'section_id',
         'schedule',
+        'start_time',
+        'end_time',
         'room',
         'description',
         'teacher_id',
+    ];
+
+    protected $casts = [
+        'start_time' => 'datetime:H:i',
+        'end_time' => 'datetime:H:i',
     ];
 
     public function teacher(): BelongsTo

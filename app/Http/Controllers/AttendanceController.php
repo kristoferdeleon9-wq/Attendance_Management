@@ -14,14 +14,17 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-        // Get all classes for the dropdown
-        $classes = SchoolClass::orderBy('class_name')->get();
+        // Get all classes with their sections
+        $classes = SchoolClass::with('section')
+            ->orderBy('class_name')
+            ->get();
 
         // Selected class
         $classId = $request->class_id;
 
-        // Selected date, default to today
-        $date = $request->date ?? Carbon::today()->toDateString();
+        // Selected date
+        $date = $request->date
+            ?? Carbon::today()->toDateString();
 
         $schoolClass = null;
         $students = collect();
@@ -29,18 +32,41 @@ class AttendanceController extends Controller
 
         if ($classId) {
 
-            // Find selected class
-            $schoolClass = SchoolClass::findOrFail($classId);
+            // Get selected class
+            $schoolClass = SchoolClass::with('section')
+                ->findOrFail($classId);
 
-            // Get students enrolled in this class
-            $students = $schoolClass->students()
-                ->orderBy('last_name')
-                ->orderBy('first_name')
-                ->get();
+            /*
+            |--------------------------------------------------------------------------
+            | Get students from the CLASS SECTION
+            |--------------------------------------------------------------------------
+            */
 
-            // Get attendance records for selected date
-            $attendances = Attendance::where('class_id', $classId)
-                ->whereDate('attendance_date', $date)
+            if ($schoolClass->section_id) {
+
+                $students = \App\Models\Student::where(
+                    'section_id',
+                    $schoolClass->section_id
+                )
+                    ->orderBy('last_name')
+                    ->orderBy('first_name')
+                    ->get();
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Get attendance for this class and date
+            |--------------------------------------------------------------------------
+            */
+
+            $attendances = Attendance::where(
+                'class_id',
+                $schoolClass->id
+            )
+                ->whereDate(
+                    'attendance_date',
+                    $date
+                )
                 ->get()
                 ->keyBy('student_id');
         }

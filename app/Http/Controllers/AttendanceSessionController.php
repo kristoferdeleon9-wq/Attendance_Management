@@ -13,54 +13,66 @@ class AttendanceSessionController extends Controller
      * Start attendance session.
      */
     public function start(Request $request)
-    {
-        $request->validate([
-            'class_id' => 'required|exists:classes,id',
-        ]);
+        {
+            $request->validate([
+                'class_id' => 'required|exists:classes,id',
+            ]);
 
-        $class = SchoolClass::findOrFail($request->class_id);
+            $class = SchoolClass::findOrFail($request->class_id);
 
-        // Check if there is already an open session
-        $existingSession = AttendanceSession::where(
-            'class_id',
-            $class->id
-        )
-            ->whereDate(
-                'attendance_date',
-                Carbon::today()
-            )
-            ->where('status', 'open')
-            ->first();
+            $now = Carbon::now();
 
-        if ($existingSession) {
-            return redirect()
-                ->route(
-                    'attendance.session',
-                    $existingSession
-                )
-                ->with(
-                    'info',
-                    'An attendance session is already open for this class.'
+            $startTime = Carbon::today()->setTimeFromTimeString(
+                $class->start_time
+            );
+
+            $endTime = Carbon::today()->setTimeFromTimeString(
+                $class->end_time
+            );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Check class schedule
+            |--------------------------------------------------------------------------
+            */
+
+            if ($now->lt($startTime)) {
+                return back()->with(
+                    'error',
+                    'Attendance cannot start yet. Class starts at ' .
+                    $startTime->format('h:i A') . '.'
                 );
-        }
+            }
 
-        $session = AttendanceSession::create([
-            'class_id' => $class->id,
-            'attendance_date' => Carbon::today(),
-            'started_at' => now(),
-            'status' => 'open',
-        ]);
+            if ($now->gte($endTime)) {
+                return back()->with(
+                    'error',
+                    'This class has already ended at ' .
+                    $endTime->format('h:i A') . '.'
+                );
+            }
 
-        return redirect()
-            ->route(
+            /*
+            |--------------------------------------------------------------------------
+            | Create attendance session
+            |--------------------------------------------------------------------------
+            */
+
+            $session = AttendanceSession::create([
+                'class_id' => $class->id,
+                'attendance_date' => today(),
+                'started_at' => now(),
+                'status' => 'open',
+            ]);
+
+            return redirect()->route(
                 'attendance.session',
                 $session
-            )
-            ->with(
+            )->with(
                 'success',
-                'Attendance session started successfully.'
+                'Attendance session started.'
             );
-    }
+        }
 
     /**
      * Display active session.

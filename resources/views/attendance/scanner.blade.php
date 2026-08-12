@@ -321,6 +321,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function onScanSuccess(decodedText) {
 
+    console.log('QR CONTENT:', decodedText);
+
         if (!scanning) {
             return;
         }
@@ -359,7 +361,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         })
 
-        .then(response => response.json())
+        .then(async response => {
+            const text = await response.text();
+
+            console.log('HTTP STATUS:', response.status);
+            console.log('SERVER RESPONSE:', text);
+
+            return JSON.parse(text);
+        })
 
         .then(data => {
 
