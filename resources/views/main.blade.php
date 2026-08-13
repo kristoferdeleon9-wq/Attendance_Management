@@ -55,44 +55,6 @@
 
     </div>
 
-    <!-- STUDENT ACCESS -->
-<section class="student-access">
-
-    <div class="student-access-content">
-
-        <div class="student-icon">
-            👨‍🎓
-        </div>
-
-        <div class="student-text">
-
-            <span class="student-label">
-                STUDENT
-            </span>
-
-            <h2>
-                As a Student
-            </h2>
-
-            <p>
-                Access your attendance information, view your QR code,
-                and check your attendance records.
-            </p>
-
-            <a
-                href="{{ route('student.access') }}"
-                class="student-button"
-            >
-                Continue as Student
-                <span>→</span>
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
 
     <div class="navbar-actions">
 
@@ -306,6 +268,72 @@
 
                 </div>
 
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{{-- ==========================================
+     AS A STUDENT
+========================================== --}}
+
+<section class="student-section" id="student">
+
+    <div class="student-content">
+
+        <div class="student-badge">
+            🎓 STUDENT ACCESS
+        </div>
+
+        <h2>
+            As a Student
+        </h2>
+
+        <p>
+            Access your attendance information, view your QR code,
+            and check your attendance records anytime.
+        </p>
+
+        <a href="{{ route('student.access') }}" class="student-button">
+            Continue as Student
+            <span>→</span>
+        </a>
+
+    </div>
+
+    <div class="student-card">
+
+        <div class="student-card-icon">
+            🎓
+        </div>
+
+        <h3>
+            Your Attendance, Anytime
+        </h3>
+
+        <p>
+            Students can easily access their attendance information
+            and QR code using their Student ID.
+        </p>
+
+        <div class="student-features">
+
+            <div>
+                <span>✓</span>
+                View QR Code
+            </div>
+
+            <div>
+                <span>✓</span>
+                Check Attendance
+            </div>
+
+            <div>
+                <span>✓</span>
+                View Attendance Records
             </div>
 
         </div>

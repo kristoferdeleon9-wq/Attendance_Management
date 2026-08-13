@@ -23,6 +23,7 @@ export default defineConfig({
                 'resources/css/teacher.css',
                 'resources/css/settings.css',
                 'resources/css/main.css',
+                "resources/css/student-access.css",
                 'resources/js/app.js'
             ],
             refresh: true,

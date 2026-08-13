@@ -1,0 +1,218 @@
+/* ==========================================
+   STUDENT ACCESS PAGE
+========================================== */
+
+.student-access-page {
+    min-height: calc(100vh - 75px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+
+/* ==========================================
+   CARD
+========================================== */
+
+.student-access-card {
+    width: 100%;
+    max-width: 480px;
+
+    padding: 40px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.08);
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   ICON
+========================================== */
+
+.student-access-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef2ff;
+
+    border-radius: 16px;
+
+    font-size: 34px;
+}
+
+
+/* ==========================================
+   TITLE
+========================================== */
+
+.student-access-card h1 {
+    margin: 0 0 8px;
+
+    color: #111827;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+.student-access-card > p {
+    margin: 0 0 28px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.student-access-card form {
+    text-align: left;
+}
+
+
+.student-access-card label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #374151;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.student-access-card input {
+    width: 100%;
+
+    height: 45px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+.student-access-card input:focus {
+    border-color: #4f46e5;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.10);
+}
+
+
+.student-access-card input::placeholder {
+    color: #9ca3af;
+}
+
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.student-access-card button {
+    width: 100%;
+
+    height: 45px;
+
+    margin-top: 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #4f46e5;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.student-access-card button:hover {
+    background: #4338ca;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   BACK LINK
+========================================== */
+
+.back-link {
+    display: inline-block;
+
+    margin-top: 25px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.back-link:hover {
+    color: #4f46e5;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .student-access-page {
+        padding: 25px 15px;
+    }
+
+    .student-access-card {
+        padding: 30px 22px;
+    }
+
+    .student-access-card h1 {
+        font-size: 22px;
+    }
+
+}
