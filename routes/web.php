@@ -11,54 +11,65 @@ use App\Http\Controllers\AttendanceSessionController;
 use App\Http\Controllers\QrScannerController;
 use App\Http\Controllers\StudentQrController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AuthController;
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
+Route::get('/login', [AuthController::class, 'showLogin'])
+    ->name('login');
 
-Route::get('/', function () {
-    return redirect()->route('students.index');
-});
+Route::post('/login', [AuthController::class, 'login'])
+    ->name('login.submit');
 
-Route::post('/students/import', [StudentController::class, 'import'])
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout');
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    Route::resource('students', StudentController::class);
+
+    Route::resource('sections', SectionController::class);
+
+    Route::resource('classes', SchoolClassController::class);
+
+    Route::resource('teachers', TeacherController::class);
+
+    Route::post('/students/import', [StudentController::class, 'import'])
     ->name('students.import');
 
-Route::resource('students', StudentController::class);
+    Route::get('/students/{student}/qr', [StudentQrController::class, 'show'])
+        ->name('students.qr');
 
-Route::resource('sections', SectionController::class);
+    Route::get('/attendance', [AttendanceController::class, 'index'])
+        ->name('attendance.index');
 
-Route::resource('classes', SchoolClassController::class);
+    Route::post('/attendance', [AttendanceController::class, 'store'])
+        ->name('attendance.store');
 
-Route::resource('teachers', TeacherController::class);
+    Route::put('/attendance/{attendance}', [AttendanceController::class, 'update'])
+        ->name('attendance.update');
 
-Route::get('/students/{student}/qr', [StudentQrController::class, 'show'])
-    ->name('students.qr');
+    Route::post('/students/{student}/assign-section', [StudentController::class, 'assignSection'])
+        ->name('students.assign-section');
 
-Route::get('/attendance', [AttendanceController::class, 'index'])
-    ->name('attendance.index');
+    Route::post('/attendance/session/start', [AttendanceSessionController::class, 'start'])
+        ->name('attendance.session.start');
 
-Route::post('/attendance', [AttendanceController::class, 'store'])
-    ->name('attendance.store');
+    Route::get('/attendance/session/{session}', [AttendanceSessionController::class, 'show'])
+        ->name('attendance.session');
 
-Route::put('/attendance/{attendance}', [AttendanceController::class, 'update'])
-    ->name('attendance.update');
+    Route::post('/attendance/session/end', [AttendanceSessionController::class, 'end'])
+        ->name('attendance.session.end');
 
-Route::post('/students/{student}/assign-section', [StudentController::class, 'assignSection'])
-    ->name('students.assign-section');
+    Route::get('/attendance/scanner/{class}', [QrScannerController::class, 'index'])
+        ->name('attendance.scanner');
 
-Route::post('/attendance/session/start', [AttendanceSessionController::class, 'start'])
-    ->name('attendance.session.start');
+    Route::post('/attendance/scanner/scan', [QrScannerController::class, 'scan'])
+        ->name('attendance.scan');
 
-Route::get('/attendance/session/{session}', [AttendanceSessionController::class, 'show'])
-    ->name('attendance.session');
+    Route::get('/reports', [ReportController::class, 'index'])
+        ->name('reports.index');
 
-Route::post('/attendance/session/{session}/end', [AttendanceSessionController::class, 'end'])
-    ->name('attendance.session.end');
-
-Route::get('/attendance/scanner/{class}', [QrScannerController::class, 'index'])
-    ->name('attendance.scanner');
-
-Route::post('/attendance/scanner/scan', [QrScannerController::class, 'scan'])
-    ->name('attendance.scan');
-
-Route::get('/reports', [ReportController::class, 'index'])
-    ->name('reports.index');
+});
