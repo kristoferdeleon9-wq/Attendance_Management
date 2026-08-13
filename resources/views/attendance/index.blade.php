@@ -10,7 +10,6 @@
 
 <div class="attendance-page">
 
-```
 {{-- PAGE HEADER --}}
 <div class="attendance-header">
     <div>
@@ -499,7 +498,6 @@
     </div>
 
 @endif
-```
 
 </div>
 

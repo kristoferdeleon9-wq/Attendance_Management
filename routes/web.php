@@ -14,6 +14,20 @@ use App\Http\Controllers\StudentQrController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AuthController;
 
+/*
+|--------------------------------------------------------------------------
+| PUBLIC HOME PAGE
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/', function () {
+    return view('main');
+})->name('home');
+
+Route::get('/student-access', function () {
+    return view('student-access');
+})->name('student.access');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -104,7 +118,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/attendance/session/{session}', [AttendanceSessionController::class, 'show'])
             ->name('attendance.session');
 
-        Route::post('/attendance/session/end', [AttendanceSessionController::class, 'end'])
+        Route::post('/attendance/session/{session}/end', [AttendanceSessionController::class, 'end'])
             ->name('attendance.session.end');
 
 
