@@ -7,17 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    /**
-     * Show login page.
-     */
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    /**
-     * Process login.
-     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -25,35 +19,37 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
 
-            return redirect()
-                ->intended(route('dashboard'))
-                ->with('success', 'Welcome back!');
+            if (auth()->user()->role === 'admin') {
+                return redirect()->route('dashboard');
+            }
+
+            if (auth()->user()->role === 'teacher') {
+                return redirect()->route('dashboard');
+            }
+
+            Auth::logout();
+
+            return back()->withErrors([
+                'email' => 'Your account does not have a valid role.',
+            ]);
         }
 
-        return back()
-            ->withErrors([
-                'email' => 'The email or password is incorrect.',
-            ])
-            ->onlyInput('email');
+        return back()->withErrors([
+            'email' => 'The email or password is incorrect.',
+        ])->withInput();
     }
 
-    /**
-     * Logout.
-     */
     public function logout(Request $request)
     {
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect()
-            ->route('login')
-            ->with('success', 'You have been logged out.');
+        return redirect()->route('login');
     }
 }

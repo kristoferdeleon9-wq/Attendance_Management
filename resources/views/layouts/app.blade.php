@@ -46,111 +46,138 @@
 
         <div class="sidebar-menu">
 
-            <p class="menu-title">
-                MAIN
-            </p>
+    <p class="menu-title">
+        MAIN
+    </p>
 
-            <a
-                href="{{ route('dashboard') }}"
-                class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}"
-                >
-            <span>▣</span>
-                Dashboard
-            </a>
-
-
-            <p class="menu-title">
-                MANAGEMENT
-            </p>
-
-            <a
-                href="{{ route('students.index') }}"
-                class="menu-item {{ request()->routeIs('students.*') ? 'active' : '' }}"
-            >
-                <span>👨‍🎓</span>
-                Students
-            </a>
-
-            <a
-                href="{{ route('sections.index') }}"
-                class="menu-item {{ request()->routeIs('sections.*') ? 'active' : '' }}"
-            >
-                <span>�</span>
-                Sections
-            </a>
-
-            <a
-                href="{{ route('teachers.index') }}"
-                class="menu-item {{ request()->routeIs('teachers.*') ? 'active' : '' }}"
-            >
-                <span>👨‍🏫</span>
-                Teachers
-            </a>
-
-            <a
-                href="{{ route('classes.index') }}"
-                class="menu-item {{ request()->routeIs('classes.*') ? 'active' : '' }}"
-            >
-                <span>📚</span>
-                Classes
-            </a>
+    {{-- DASHBOARD --}}
+    <a
+        href="{{ route('dashboard') }}"
+        class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+    >
+        <span>▣</span>
+        Dashboard
+    </a>
 
 
-            <p class="menu-title">
-                ATTENDANCE
-            </p>
-
-            <a
-                href="{{ route('attendance.index') }}"
-                class="menu-item {{ request()->routeIs('attendance.*') ? 'active' : '' }}"
-            >
-                <span>✓</span>
-                Attendance
-            </a>
-
-            <a
-                href="{{ route('reports.index') }}"
-                class="menu-item {{ request()->routeIs('reports.*') ? 'active' : '' }}"
-            >
-                <span>📊</span>
-                Reports
-            </a>
+    {{-- MANAGEMENT --}}
+    <p class="menu-title">
+        MANAGEMENT
+    </p>
 
 
-            <p class="menu-title">
-                SYSTEM
-            </p>
+    {{-- ADMIN ONLY --}}
+    @if(auth()->user()->role === 'admin')
 
-            <a
-                href="#"
-                class="menu-item"
-            >
-                <span>⚙</span>
-                Settings
-            </a>
+        <a
+            href="{{ route('students.index') }}"
+            class="menu-item {{ request()->routeIs('students.*') ? 'active' : '' }}"
+        >
+            <span>👨‍🎓</span>
+            Students
+        </a>
 
-        </div>
+
+        <a
+            href="{{ route('sections.index') }}"
+            class="menu-item {{ request()->routeIs('sections.*') ? 'active' : '' }}"
+        >
+            <span>💠</span>
+            Sections
+        </a>
+
+
+        <a
+            href="{{ route('teachers.index') }}"
+            class="menu-item {{ request()->routeIs('teachers.*') ? 'active' : '' }}"
+        >
+            <span>👨‍🏫</span>
+            Teachers
+        </a>
+
+
+        <a
+            href="{{ route('classes.index') }}"
+            class="menu-item {{ request()->routeIs('classes.*') ? 'active' : '' }}"
+        >
+            <span>📚</span>
+            Classes
+        </a>
+
+    @endif
+
+
+    {{-- ATTENDANCE --}}
+    <p class="menu-title">
+        ATTENDANCE
+    </p>
+
+
+    @if(in_array(auth()->user()->role, ['admin', 'teacher']))
+
+        <a
+            href="{{ route('attendance.index') }}"
+            class="menu-item {{ request()->routeIs('attendance.*') ? 'active' : '' }}"
+        >
+            <span>✓</span>
+            Attendance
+        </a>
+
+
+        <a
+            href="{{ route('reports.index') }}"
+            class="menu-item {{ request()->routeIs('reports.*') ? 'active' : '' }}"
+        >
+            <span>📊</span>
+            Reports
+        </a>
+
+    @endif
+
+
+    {{-- SYSTEM --}}
+    <p class="menu-title">
+        SYSTEM
+    </p>
+
+    <a
+        href="{{ route('settings') }}"
+        class="menu-item {{ request()->routeIs('settings') ? 'active' : '' }}"
+    >
+        <span>⚙</span>
+        Settings
+    </a>
+
+</div>
+
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+
+            <button type="submit" class="logout-btn">
+                🚪 Logout
+            </button>
+        </form>
 
 
         <div class="sidebar-footer">
 
-            <div class="user-avatar">
-                A
-            </div>
+    <div class="user-avatar">
+        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+    </div>
 
-            <div class="user-info">
+    <div class="user-info">
 
-                <strong>
-                    Administrator
-                </strong>
+        <strong>
+            {{ auth()->user()->name }}
+        </strong>
 
-                <span>
-                    Admin
-                </span>
+        <span>
+            {{ ucfirst(auth()->user()->role) }}
+        </span>
 
-            </div>
+    </div>
 
-        </div>
+</div>
 
     </aside>
 
@@ -196,17 +223,17 @@
                 <div class="topbar-user">
 
                     <div class="user-avatar">
-                        A
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                     </div>
 
                     <div>
 
                         <strong>
-                            Administrator
+                            {{ auth()->user()->name }}
                         </strong>
 
                         <small>
-                            Admin
+                            {{ ucfirst(auth()->user()->role) }}
                         </small>
 
                     </div>
