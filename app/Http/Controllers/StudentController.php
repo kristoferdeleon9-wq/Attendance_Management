@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Imports\StudentsImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -32,9 +33,41 @@ class StudentController extends Controller
         return view('students.create', compact('sections', 'section'));
     }
 
+    public function studentRegister()
+    {
+        $sections = Section::orderBy('name')->get();
+
+        return view('student-register', compact('sections'));
+    }
+
+    public function studentStore(Request $request)
+    {
+        $validated = $request->validate([
+            'student_id' => 'required|string|max:50|unique:students,student_id',
+            'first_name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
+            'section_id' => 'required|exists:sections,id',
+            'email' => 'nullable|email|max:255',
+            'course' => 'nullable|string|max:100',
+            'year_level' => 'nullable|string|max:50',
+        ]);
+
+        Student::create($validated);
+
+        return redirect()
+            ->route('student.register')
+            ->with('success', 'Your student information has been registered successfully.');
+    }
+
     // Save student
     public function store(Request $request)
     {
+        if (Student::where('student_id', $request->student_id)->exists()) {
+            return back()
+                ->withInput()
+                ->with('error', 'This student is already registered.');
+        }
+
         $validated = $request->validate([
             'student_id' => 'required|string|max:255|unique:students,student_id',
             'first_name' => 'required|string|max:255',

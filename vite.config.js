@@ -24,6 +24,7 @@ export default defineConfig({
                 'resources/css/settings.css',
                 'resources/css/main.css',
                 "resources/css/student-access.css",
+                "resources/css/student-register.css",
                 'resources/js/app.js'
             ],
             refresh: true,

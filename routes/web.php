@@ -44,6 +44,12 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
+Route::get('/student/register', [StudentController::class, 'studentRegister'])
+    ->name('student.register');
+
+Route::post('/student/register', [StudentController::class, 'studentStore'])
+    ->name('student.register.store');
+
 
 /*
 |--------------------------------------------------------------------------

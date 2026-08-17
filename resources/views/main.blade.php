@@ -297,7 +297,7 @@
             and check your attendance records anytime.
         </p>
 
-        <a href="{{ route('student.access') }}" class="student-button">
+        <a href="{{ route('student.register') }}" class="student-button">
             Continue as Student
             <span>→</span>
         </a>
