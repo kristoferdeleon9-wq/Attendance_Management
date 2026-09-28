@@ -148,7 +148,7 @@
         Settings
     </a>
 
-</div>
+    </div>
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
