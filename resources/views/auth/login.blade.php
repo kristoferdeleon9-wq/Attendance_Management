@@ -66,6 +66,7 @@
         <form
             action="{{ route('login') }}"
             method="POST"
+            id="loginForm"
         >
 
             @csrf
@@ -143,6 +144,49 @@
     </div>
 
 </div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+
+        if (!window.NativePHP) {
+            return;
+        }
+
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch(
+                'https://amenities-government-ancient-similarly.trycloudflare.com/api/login',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('auth_token', data.token);
+                window.location.href = '/dashboard';
+            } else {
+                alert(data.message);
+            }
+
+        } catch (error) {
+            alert('Unable to connect to AttendEase server.');
+        }
+    });
+</script>
 
 </body>
 

@@ -35,11 +35,11 @@ Route::get('/student-access', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/login', [AuthController::class, 'showLogin'])
-    ->name('login');
+    Route::get('/login', [AuthController::class, 'showLogin'])
+        ->name('login');
 
-Route::post('/login', [AuthController::class, 'login'])
-    ->name('login.submit');
+    Route::post('/login', [AuthController::class, 'login'])
+        ->name('login.submit');
 
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
@@ -157,3 +157,5 @@ Route::middleware('auth')->group(function () {
         ->name('students.qr');
 
 });
+
+Route::view('/mobile-test', 'mobile-test');
